@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevgilim Yağmur</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+        h1, p {
+            text-shadow: 2px 2px 5px #ff69b4;
+            animation: glow 2s infinite alternate;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        @keyframes glow {
+            from { text-shadow: 2px 2px 10px #ff69b4; }
+            to { text-shadow: 2px 2px 20px #fff; }
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: float 6s linear infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sevgilim Yağmur ❤️</h1>
+    <p>Yusuf seni çok seviyor!</p>
+
+    <audio autoplay loop>
+        <source src="yalin-her-sey-sensin.mp3" type="audio/mpeg">
+        Tarayıcınız audio etiketini desteklemiyor.
+    </audio>
+
+    <script>
+        const colors = ['#ff0000', '#ff69b4', '#ff8c00', '#da70d6', '#ff1493'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const size = 10 + Math.random() * 20;
+            heart.style.width = heart.style.height = size + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+            heart.style.setProperty('--heart-color', heart.style.backgroundColor);
+
+            heart.style.position = 'absolute';
+            heart.style.transform = 'rotate(-45deg)';
+            heart.style.zIndex = '10';
+
+            heart.style.backgroundColor = heart.style.backgroundColor;
+
+            heart.innerHTML = '';
+            heart.style.setProperty('--size', size + 'px');
+            document.body.appendChild(heart);
+
+            const before = document.createElement('div');
+            before.style.width = size + 'px';
+            before.style.height = size + 'px';
+            before.style.borderRadius = '50%';
+            before.style.backgroundColor = heart.style.backgroundColor;
+            before.style.position = 'absolute';
+            before.style.top = `-${size/2}px`;
+            before.style.left = '0px';
+            heart.appendChild(before);
+
+            const after = document.createElement('div');
+            after.style.width = size + 'px';
+            after.style.height = size + 'px';
+            after.style.borderRadius = '50%';
+            after.style.backgroundColor = heart.style.backgroundColor;
+            after.style.position = 'absolute';
+            after.style.top = '0px';
+            after.style.left = `${size/2}px`;
+            heart.appendChild(after);
+
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
