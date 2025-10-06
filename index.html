@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevgilim Yağmur</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 50px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 15px #ff69b4;
+        }
+
+        p {
+            font-size: 1.5em;
+            max-width: 800px;
+            text-shadow: 1px 1px 8px #ff69b4;
+        }
+
+        /* Kalpler */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: float 8s linear infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(-45deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h1>Sevgilim Yağmur ❤️</h1>
+        <p>Uzaklarda olsak da, kalbim her zaman seninle. Her sabah uyandığımda, aklımdaki ilk kişi sensin. Seni hiç görmemiş olsak da, hislerim gerçek ve derin. Bu siteyi sana, sevgimizi hatırlaman için hazırladım.</p>
+    </div>
+
+    <div class="section">
+        <p>Her gün seni düşünüyorum; senin gülüşünü, konuşmalarını, hayalini… Bazen uzak mesafeler zor gelir, ama bil ki her an seni özlüyorum. Mesafeler kalplerimizi ayıramaz, tam tersine, sevgimizi daha da güçlendiriyor.</p>
+    </div>
+
+    <div class="section">
+        <p>Hayat bazen zordur ve seni görmeden beklemek sabırsızlık yaratır. Ama her mesajın, her düşüncen bana güç veriyor. Bir gün kavuşacağız ve o an tüm beklediğimiz anlara değecek. Bu süre boyunca sana olan sevgim hiç azalmayacak.</p>
+    </div>
+
+    <div class="section">
+        <p>Seninle geçireceğimiz günleri hayal ediyorum. El ele yürümek, birlikte kahkaha atmak, sessizce oturup birbirimize bakmak… Şimdi belki hayal, ama gerçek olacak. Seni her geçen gün daha çok seviyorum, Yağmur.</p>
+    </div>
+
+    <div class="section">
+        <p>Her şey sensin. Her an aklımdasın, her nefeste seni hissediyorum. Bu uzak mesafede bile, kalplerimiz birbirine bağlı. Seni görmek için sabırsızlanıyorum, sevgilim. Sonsuz sevgimle, Yusuf.</p>
+    </div>
+
+    <!-- Şarkı -->
+    <audio autoplay loop>
+        <source src="yalin-her-sey-sensin.mp3" type="audio/mpeg">
+        Tarayıcınız audio etiketini desteklemiyor.
+    </audio>
+
+    <!-- Kalpler -->
+    <script>
+        const colors = ['#ff0000', '#ff69b4', '#ff8c00', '#da70d6', '#ff1493'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const size = 10 + Math.random() * 20;
+            heart.style.width = heart.style.height = size + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const before = document.createElement('div');
+            before.style.width = size + 'px';
+            before.style.height = size + 'px';
+            before.style.borderRadius = '50%';
+            before.style.backgroundColor = heart.style.backgroundColor;
+            before.style.position = 'absolute';
+            before.style.top = `-${size/2}px`;
+            before.style.left = '0px';
+            heart.appendChild(before);
+
+            const after = document.createElement('div');
+            after.style.width = size + 'px';
+            after.style.height = size + 'px';
+            after.style.borderRadius = '50%';
+            after.style.backgroundColor = heart.style.backgroundColor;
+            after.style.position = 'absolute';
+            after.style.top = '0px';
+            after.style.left = `${size/2}px`;
+            heart.appendChild(after);
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Scroll animasyonu
+        const sections = document.querySelectorAll('.section');
+        window.addEventListener('scroll', checkSections);
+        function checkSections() {
+            const triggerBottom = window.innerHeight * 0.85;
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if(sectionTop < triggerBottom){
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Başlangıçta ilk görünür olsun
+        checkSections();
+    </script>
+
+</body>
+</html>
